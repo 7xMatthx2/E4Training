@@ -1,8 +1,12 @@
 
 package com.sii.rental.ui.views;
 
-import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -19,8 +23,8 @@ public class RentalPropertyPart {
 	private Label rentedObjectLabel, customerNameLabel, startDateLabel, endDateLabel;
 	private Group grpDatesDeLocation;
 	
-	@PostConstruct
-	public void createUI(Composite parent, RentalAgency a) {
+	@Inject
+	public RentalPropertyPart(Composite parent, RentalAgency a) {
 		GridLayout gl_parent = new GridLayout(1, false);
 		parent.setLayout(gl_parent);
 		
@@ -65,16 +69,23 @@ public class RentalPropertyPart {
 		endDateLabel = new Label(grpDatesDeLocation, SWT.NONE);
 		endDateLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		endDateLabel.setText("EndDate");
-		
-		setRental(a.getRentals().get(0));
+	}
+	
+	@Inject @Optional
+	public void receiveSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Rental r)
+	{
+		setRental(r);
 	}
 	
 	public void setRental(Rental r)
 	{
-		rentedObjectLabel.setText(r.getRentedObject().getName());
-		customerNameLabel.setText(r.getCustomer().getDisplayName());
-		startDateLabel.setText(r.getStartDate().toString());
-		endDateLabel.setText(r.getEndDate().toString());
+		if(r != null)
+		{
+			rentedObjectLabel.setText(r.getRentedObject().getName());
+			customerNameLabel.setText(r.getCustomer().getDisplayName());
+			startDateLabel.setText(r.getStartDate().toString());
+			endDateLabel.setText(r.getEndDate().toString());
+		}
 	}
 
 	@Focus

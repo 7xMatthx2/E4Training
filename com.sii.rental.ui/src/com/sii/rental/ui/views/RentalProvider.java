@@ -1,5 +1,6 @@
 package com.sii.rental.ui.views;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import com.opcoach.training.rental.Customer;
 import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
+import com.opcoach.training.rental.RentalObject;
 
 public class RentalProvider extends LabelProvider implements ITreeContentProvider{
 
@@ -30,12 +32,17 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		
 		if(parentElement instanceof RentalAgency)
 		{
-			result = ((RentalAgency) parentElement).getCustomers().toArray();
+			RentalAgency agency = (RentalAgency) parentElement;
+			return new Node[] {new Node(Node.CUSTOMERS, agency), new Node(Node.LOCATIONS, agency), new Node(Node.RENTAL_OBJECTS, agency)};			
 		}
 		else if(parentElement instanceof Customer)
 		{
 			Customer customer = (Customer) parentElement;
 			result = getRentedObjects(customer).toArray();
+		}
+		else if(parentElement instanceof Node)
+		{
+			result = ((Node) parentElement).getChildrens();
 		}
 		
 		return (result == null) ? new Object[0] : result;
@@ -61,6 +68,10 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 			Customer customer = (Customer) element;
 			return getRentedObjects(customer).size() > 0;
 		}
+		else if(element instanceof Node)
+		{
+			return ((Node) element).getChildrens().length > 0;
+		}
 		return false;
 	}
 	
@@ -74,6 +85,14 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		{
 			return ((Customer)element).getDisplayName();
 		}
+		else if(element instanceof Node)
+		{
+			return element.toString();
+		}
+		else if(element instanceof RentalObject)
+		{
+			return ((RentalObject) element).getName();
+		}
 		return super.getText(element);
 	}
 	
@@ -84,5 +103,42 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 				.collect(Collectors.toList());
 		
 		return rentals;
+	}
+	
+	private class Node
+	{
+		private static final String CUSTOMERS = "Customers";
+		private static final String LOCATIONS = "Locations";
+		private static final String RENTAL_OBJECTS = "Objets à louer";
+		
+		private String title;
+		private RentalAgency a;
+		
+		public Node(String title, RentalAgency a)
+		{
+			super();
+			this.title = title;
+			this.a = a;
+		}
+		
+		public Object[] getChildrens()
+		{
+			switch(title)
+			{
+			case CUSTOMERS:
+				return a.getCustomers().toArray();
+			case LOCATIONS:
+				return a.getRentals().toArray();
+			case RENTAL_OBJECTS:
+				return a.getObjectsToRent().toArray();
+				default :
+					return new Object[0];
+			}
+		}
+		
+		@Override
+		public String toString() {
+			return title;
+		}
 	}
 }

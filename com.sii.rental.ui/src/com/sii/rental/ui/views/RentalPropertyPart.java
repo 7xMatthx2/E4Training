@@ -2,7 +2,6 @@
 package com.sii.rental.ui.views;
 
 import javax.annotation.PostConstruct;
-
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -10,10 +9,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 import com.opcoach.training.rental.Rental;
-import com.sii.rental.core.RentalCoreActivator;
-import org.eclipse.wb.swt.SWTResourceManager;
+import com.opcoach.training.rental.RentalAgency;
 
 public class RentalPropertyPart {
 
@@ -21,7 +20,7 @@ public class RentalPropertyPart {
 	private Group grpDatesDeLocation;
 	
 	@PostConstruct
-	public void createUI(Composite parent) {
+	public void createUI(Composite parent, RentalAgency a) {
 		GridLayout gl_parent = new GridLayout(1, false);
 		parent.setLayout(gl_parent);
 		
@@ -67,7 +66,7 @@ public class RentalPropertyPart {
 		endDateLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		endDateLabel.setText("EndDate");
 		
-		setRental(RentalCoreActivator.getAgency().getRentals().get(0));
+		setRental(a.getRentals().get(0));
 	}
 	
 	public void setRental(Rental r)

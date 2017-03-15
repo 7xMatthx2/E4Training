@@ -10,5 +10,19 @@
          </instanceof>
       </definition>
    </extension>
+   <extension
+         point="com.opcoach.e4.preferences.e4PreferencePages">
+      <page
+            class="com.sii.rental.ui.views.RentalPreferencePage"
+            id="com.sii.rental.ui.page1"
+            name="Rental Preference Page">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.sii.rental.ui.RentalPreferenceInitializer">
+      </initializer>
+   </extension>
 
 </plugin>

@@ -1,4 +1,4 @@
-package com.sii.rental.ui;
+package com.sii.rental.ui.prefs;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -7,6 +7,7 @@ import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.swt.graphics.RGB;
 
 import com.opcoach.e4.preferences.ScopedPreferenceStore;
+import com.sii.rental.ui.RentalUIConstants;
 
 public class RentalPreferenceInitializer extends AbstractPreferenceInitializer implements RentalUIConstants {
 

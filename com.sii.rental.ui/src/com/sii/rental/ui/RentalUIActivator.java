@@ -26,5 +26,4 @@ public class RentalUIActivator implements BundleActivator {
 	public void stop(BundleContext bundleContext) throws Exception {
 		RentalUIActivator.context = null;
 	}
-
 }

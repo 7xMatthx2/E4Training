@@ -1,4 +1,4 @@
-package com.sii.rental.ui.views;
+package com.sii.rental.ui.prefs;
 
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;

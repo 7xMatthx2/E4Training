@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -25,7 +26,7 @@ public class AgencyPart {
 	private ESelectionService selectionService;
 	
 	@PostConstruct
-	public void initUI(IEclipseContext context, Composite parent, RentalAgency agency) {
+	public void initUI(IEclipseContext context, Composite parent, RentalAgency agency, EMenuService menuService) {
 		List<RentalAgency> agencies = new ArrayList<RentalAgency>();
 		agencies.add(agency);
 		TreeViewer tv = new TreeViewer(parent);
@@ -42,6 +43,7 @@ public class AgencyPart {
 		});
 		tv.setInput(agencies);
 		tv.expandAll();
+		menuService.registerContextMenu(tv.getControl(), "com.sii.rental.eap.popupmenu.0");
 	}
 
 	@Focus

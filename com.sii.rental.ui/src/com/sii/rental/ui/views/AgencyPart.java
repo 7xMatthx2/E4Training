@@ -41,6 +41,7 @@ public class AgencyPart {
 			}
 		});
 		tv.setInput(agencies);
+		tv.expandAll();
 	}
 
 	@Focus

@@ -41,14 +41,12 @@ public class RentalPropertyPart {
 		
 		rentedObjectLabel = new Label(infoGroup, SWT.NONE);
 		rentedObjectLabel.setLayoutData(gd);
-		rentedObjectLabel.setText("RentalObject");
 		
 		Label preCustomerLabel = new Label(infoGroup, SWT.NONE);
 		preCustomerLabel.setText("Loué à : ");
 		
 		customerNameLabel = new Label(infoGroup, SWT.NONE);
-		customerNameLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-		customerNameLabel.setText("CustomerName");	
+		customerNameLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		grpDatesDeLocation = new Group(parent, SWT.NONE);
 		grpDatesDeLocation.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -61,14 +59,12 @@ public class RentalPropertyPart {
 		
 		startDateLabel = new Label(grpDatesDeLocation, SWT.NONE);
 		startDateLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		startDateLabel.setText("StartDate");
 		
 		Label preEndDateLabel = new Label(grpDatesDeLocation, SWT.NONE);
 		preEndDateLabel.setText("au : ");
 		
 		endDateLabel = new Label(grpDatesDeLocation, SWT.NONE);
 		endDateLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		endDateLabel.setText("EndDate");
 	}
 	
 	@Inject @Optional

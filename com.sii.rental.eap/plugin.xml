@@ -6,7 +6,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="com.sii.rental.eap"
+            name="Rental EAP"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="lifeCycleURI"
@@ -15,6 +15,10 @@
          <property
                name="applicationCSS"
                value="platform:/plugin/com.sii.rental.eap/css/default.css">
+         </property>
+         <property
+               name="appName"
+               value="Rental EAP">
          </property>
       </product>
    </extension>

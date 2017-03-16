@@ -21,5 +21,6 @@ public class RentalPreferenceInitializer extends AbstractPreferenceInitializer i
 		ps.setDefault(PREF_CUSTOMER_COLOR, StringConverter.asString(new RGB(20,200,100)));
 		ps.setDefault(PREF_RENTAL_COLOR, StringConverter.asString(new RGB(50,20,60)));
 		ps.setDefault(PREF_RENTAL_OBJECT_COLOR, StringConverter.asString(new RGB(200,50,90)));
+		ps.setDefault(PREF_PALETTE, "com.sii.rental.ui.paletteDefault");
 	}
 }

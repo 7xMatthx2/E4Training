@@ -55,7 +55,8 @@ public class AgencyPart implements RentalUIConstants{
 	@Inject
 	public void updateValues(@Preference(value=PREF_CUSTOMER_COLOR) String custCol, 
 			@Preference(value=PREF_RENTAL_COLOR) String rentalCol,
-			@Preference(value=PREF_RENTAL_OBJECT_COLOR) String rentalObjectCol)
+			@Preference(value=PREF_RENTAL_OBJECT_COLOR) String rentalObjectCol, 
+			@Preference(value=PREF_PALETTE) String paletteId)
 	{
 		if(!tv.getControl().isDisposed())
 		{

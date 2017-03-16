@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
+   <extension-point id="palette" name="palette" schema="schema/palette.exsd"/>
 
    <extension
          point="org.eclipse.core.expressions.definitions">
@@ -17,6 +18,11 @@
             class="com.sii.rental.ui.prefs.RentalPreferencePage"
             id="com.sii.rental.ui.page1">
       </page>
+      <page
+            class="com.sii.rental.ui.prefs.PalettePreferencePage"
+            id="com.sii.rental.ui.palettePreferencePage"
+            name="Palette Preference Page">
+      </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
@@ -30,6 +36,19 @@
       <fragment
             uri="fragment.e4xmi">
       </fragment>
+   </extension>
+   <extension
+         point="com.sii.rental.ui.palette">
+      <palette
+            id="com.sii.rental.ui.paletteDefault"
+            name="Default"
+            paletteClass="com.sii.rental.ui.palette.DefaultPalette">
+      </palette>
+      <palette
+            id="com.sii.rental.ui.paletteMoche"
+            name="PaletteMoche"
+            paletteClass="com.sii.rental.ui.palette.PaletteMoche">
+      </palette>
    </extension>
 
 </plugin>

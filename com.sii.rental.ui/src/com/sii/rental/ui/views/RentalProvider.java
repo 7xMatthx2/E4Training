@@ -1,14 +1,15 @@
 package com.sii.rental.ui.views;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.resource.JFaceResources;
@@ -16,11 +17,8 @@ import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
-import org.w3c.dom.css.RGBColor;
 
 import com.opcoach.e4.preferences.ScopedPreferenceStore;
 import com.opcoach.training.rental.Customer;
@@ -28,6 +26,7 @@ import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.RentalObject;
 import com.sii.rental.ui.RentalUIConstants;
+import com.sii.rental.ui.palette.Palette;
 
 public class RentalProvider extends LabelProvider implements ITreeContentProvider, IColorProvider, RentalUIConstants{
 
@@ -35,6 +34,8 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	private ImageRegistry registry;
 	
 	private final IPreferenceStore preferenceStore;
+	
+	private IColorProvider currentColorProvider;	
 	
 	public RentalProvider() {
 		this.preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "com.sii.rental.ui");
@@ -208,38 +209,12 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 
 	@Override
 	public Color getForeground(Object element) {
-		if(element instanceof Customer)
-		{
-			return getAColor(preferenceStore.getString(PREF_CUSTOMER_COLOR));
-		}
-		else if(element instanceof Rental)
-		{
-			return getAColor(preferenceStore.getString(PREF_RENTAL_COLOR));
-		}
-		else if(element instanceof RentalObject)
-		{
-			return getAColor(preferenceStore.getString(PREF_RENTAL_OBJECT_COLOR));
-		}
-		
-		return null;
+		return currentColorProvider.getForeground(element);
 	}
 	
-	private Color getAColor(String rgbKey)
-	{
-		ColorRegistry colorRegistry = JFaceResources.getColorRegistry();
-		Color col = colorRegistry.get(rgbKey);
-		if(col == null)
-		{
-			colorRegistry.put(rgbKey, StringConverter.asRGB(rgbKey));
-			col = colorRegistry.get(rgbKey);
-		}
-		return col;
-	}
-
 	@Override
 	public Color getBackground(Object element) {
-		// TODO Auto-generated method stub
-		return null;
+		return currentColorProvider.getBackground(element);
 	}
 	
 	@Override
@@ -262,5 +237,12 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		}
 		
 		return null;
+	}
+	
+	@Inject
+	public void updateValues(@Preference(value=PREF_PALETTE) String paletteId, @Named(PALETTE_MANAGER) Map<String, Palette> paletteManager)
+	{
+		Palette currentPalette = paletteManager.get(paletteId);
+		currentColorProvider = currentPalette.getProvider();		
 	}
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<airline:Airline
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:airline="http://com.sii.airline/1.0"
+    xsi:schemaLocation="http://com.sii.airline/1.0 airline.ecore">
+  <aircrafts/>
+  <employees
+      xsi:type="airline:Steward"/>
+  <employees
+      xsi:type="airline:Steward"/>
+  <flights/>
+</airline:Airline>

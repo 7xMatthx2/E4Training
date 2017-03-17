@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated airline -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.sii.airline.airline.presentation.AirlineModelWizardID"
+            name="%_UI_AirlineModelWizard_label"
+            class="com.sii.airline.airline.presentation.AirlineModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/AirlineModelFile.gif">
+         <description>%_UI_AirlineModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated airline -->
+      <editor
+            id="com.sii.airline.airline.presentation.AirlineEditorID"
+            name="%_UI_AirlineEditor_label"
+            icon="icons/full/obj16/AirlineModelFile.gif"
+            extensions="airline"
+            class="com.sii.airline.airline.presentation.AirlineEditor"
+            contributorClass="com.sii.airline.airline.presentation.AirlineActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
